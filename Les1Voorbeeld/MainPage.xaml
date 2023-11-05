@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Les1Voorbeeld.MainPage">
+
+    <StackLayout>
+        <Button x:Name="Voorbeeld1" Text="Voorbeeld1" Clicked="Voorbeeld1_Clicked" />
+        <Button x:Name="Voorbeeld2" Text="Voorbeeld2" Clicked="Voorbeeld2_Clicked" />
+        <Button x:Name="Voorbeeld3" Text="Voorbeeld3" Clicked="Voorbeeld3_Clicked" />
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Onderneming_MVVM.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Onderneming_MVVM"
+    xmlns:view="clr-namespace:Onderneming_MVVM.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Home"
+                          ContentTemplate="{DataTemplate view:MainPage}" />
+        <ShellContent Title="Films"
+                          ContentTemplate="{DataTemplate view:MoviePage}" />
+        <ShellContent Title="Weer"
+                          ContentTemplate="{DataTemplate view:WeerPage}" />
+    </FlyoutItem>
+
+</Shell>

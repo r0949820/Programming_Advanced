@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VakkenOefening.Views.OverzichtVakkenFlex"
+             xmlns:model="clr-namespace:VakkenOefening.Models"
+             xmlns:viewmodel="clr-namespace:VakkenOefening.ViewModels"
+             x:DataType="viewmodel:OverzichtVakkenViewModel"
+             Title="{Binding Title}">
+    
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Acties">
+            <MenuFlyoutItem x:Name="MfiToevoegen" Text="Toevoegen" Command="{Binding VoegVakToeCommand}"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    
+    <ScrollView>
+        <FlexLayout Wrap="Wrap" AlignContent="SpaceEvenly" AlignItems="Center" BindableLayout.ItemsSource="{Binding Vakken}">
+            <FlexLayout.GestureRecognizers>
+                <SwipeGestureRecognizer
+                    Direction="Right"
+                    CommandParameter="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OverzichtVakkenViewModel}}, Path=DeleteVakCommand}"/>
+            </FlexLayout.GestureRecognizers>
+
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:Vak">
+                    <VerticalStackLayout>
+                        <ImageButton
+                            Source="{Binding Afbeelding}"
+                            AutomationId="{Binding Id}"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OverzichtVakkenViewModel}}, Path=OpenDetailsVakCommand}"/>
+
+                        <Label
+                            Style="{StaticResource MyLabelStyle}" 
+                            Text="{Binding Naam}"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Onderneming_MVVM.Views.ToevoegenPage"
+             xmlns:model="clr-namespace:Onderneming_MVVM.Models" 
+             xmlns:viewmodel="clr-namespace:Onderneming_MVVM.ViewModels"
+             x:DataType="viewmodel:MainPageViewModel"
+             Title="Werknemer toevoegen">
+
+    <StackLayout>
+        <Entry Placeholder="Voornaam" Text="{Binding Werknemer.Voornaam}" />
+        <Entry Placeholder="Achternaam" Text="{Binding Werknemer.Achternaam}" />
+        <Entry Placeholder="Functie" Text="{Binding Werknemer.Functie}" />
+        <Entry Placeholder="Upload Avatar" Text="{Binding Werknemer.Avatar}" />
+        <Label Text="Geboortedatum"/>
+        <DatePicker Date="{Binding Werknemer.Geboortedatum}" />
+        <Label Text="In dienst sinds"/>
+        <DatePicker Date="{Binding Werknemer.InDienst}" />
+
+        <Button Text="Toevoegen"
+                Command="{Binding VoegWerknemerToeCommand}" />
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="VakkenOefening.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:VakkenOefening.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <Shell.MenuBarItems>
+        <MenuBarItem Text="Ga naar">
+
+            <MenuFlyoutItem Text="Home" x:Name="MfiHome" Clicked="MfiHome_Clicked" />
+            <MenuFlyoutItem Text="Options" x:Name="MfiOptoins" Clicked="MfiOptions_Clicked" />
+
+            <MenuFlyoutSubItem Text="Vakken">
+
+                <MenuFlyoutSubItem Text="Overzicht">
+                    <MenuFlyoutItem Text="Grid" x:Name="MfiGrid" Clicked="MfiGrid_Clicked" />
+                    <MenuFlyoutItem Text="Flex" x:Name="MfiFlex" Clicked="MfiFlex_Clicked" />
+                    <MenuFlyoutItem Text="Stack" x:Name="MfiStack" Clicked="MfiStack_Clicked" />
+                </MenuFlyoutSubItem>
+
+            </MenuFlyoutSubItem>
+
+            <MenuFlyoutSubItem Text="OMDB">
+                <MenuFlyoutItem Text="Zoek films" x:Name="MfiFilms" Clicked="MfiFilms_Clicked" />
+                <MenuFlyoutItem Text="Zoek series" x:Name="MfiSeries" Clicked="MfiSeries_Clicked" />
+            </MenuFlyoutSubItem>
+
+        </MenuBarItem>
+    </Shell.MenuBarItems>
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>

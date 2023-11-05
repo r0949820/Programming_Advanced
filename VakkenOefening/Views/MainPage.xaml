@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VakkenOefening.Views.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="10"
+            VerticalOptions="Center">
+
+            <Button 
+                Text="OverzichtVakkenStack" 
+                x:Name="OverzichtVakkenStack" 
+                Clicked="OverzichtVakkenStack_Clicked"
+                Style="{StaticResource MainPageButtonStyle}"/>
+            
+            <Button 
+                Text="OverzichtVakkenGrid" 
+                x:Name="OverzichtVakkenGrid" 
+                Clicked="OverzichtVakkenGrid_Clicked"
+                Style="{StaticResource MainPageButtonStyle}"/>
+            
+            <Button 
+                Text="OverzichtVakkenFlex" 
+                x:Name="OverzichtVakkenFlex" 
+                Clicked="OverzichtVakkenFlex_Clicked"
+                Style="{StaticResource MainPageButtonStyle}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:VakkenOefening.Models"
+             xmlns:viewmodel="clr-namespace:VakkenOefening.ViewModels"
+             x:DataType="viewmodel:SeriesViewModel"
+             x:Class="VakkenOefening.Views.SerieView"
+             Title="Series">
+
+    <Grid RowDefinitions="Auto, *">
+        <HorizontalStackLayout Grid.Row="0">
+            <Entry x:Name="SearchField" Placeholder="Zoek" Text="{Binding SearchValue}" TextChanged="SearchField_TextChanged" />
+            <Entry x:Name="YearField" Keyboard="Numeric" Placeholder="Jaartal" Text="{Binding YearValue}" TextChanged="YearField_TextChanged" />
+        </HorizontalStackLayout>
+        <CollectionView ItemsSource="{Binding SeriesList}" SelectionMode="None" Grid.Row="1" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Series">
+                    <Grid Padding="10">
+
+                        <VerticalStackLayout HeightRequest="300">
+                            <ImageButton 
+                            Source="{Binding Poster}" 
+                            HeightRequest="200"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SeriesViewModel}}, Path=GaNaarImdbCommand}"/>
+                            <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" TextColor="{AppThemeBinding Light={StaticResource Blauw}, Dark={StaticResource Wit}}"/>
+                            <Label Text="{Binding Year}" HorizontalOptions="CenterAndExpand" TextColor="{AppThemeBinding Light={StaticResource Blauw}, Dark={StaticResource Wit}}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
