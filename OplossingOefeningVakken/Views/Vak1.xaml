@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VakkenOefening.Views.Vak1"
+             xmlns:model="clr-namespace:VakkenOefening.Models"
+             xmlns:viewmodel="clr-namespace:VakkenOefening.ViewModels"
+             x:DataType="viewmodel:VakViewModel"
+             Title="{Binding Title}">
+    <ScrollView>
+    <VerticalStackLayout>
+        <Label 
+                Style="{StaticResource MyLabelStyle}" 
+                Text="{Binding Vak.Naam}"/>
+
+        <Image 
+            Source="{Binding Vak.Afbeelding}"
+            Style="{StaticResource ImageCentered}"/>
+
+        <HorizontalStackLayout>
+            <Label Style="{StaticResource MyLabelStyle}" Text="Vast lokaal?"/>
+            <CheckBox x:Name="IsVastLokaal" IsChecked="{Binding Vak.HeeftVastLokaal, Mode=TwoWay}"/>
+            <Entry x:Name="LokaalBlob" Keyboard="Default" Placeholder="BlokNr" Text="{Binding Vak.VastLokaalBlok, Mode=TwoWay}" IsVisible="{Binding Vak.HeeftVastLokaal, Mode=TwoWay}"/>
+            <Entry x:Name="LokaalNummer" Keyboard="Numeric" Placeholder="Lokaalnr" Text="{Binding Vak.VastLokaalNummer, Mode=TwoWay}" IsVisible="{Binding Vak.HeeftVastLokaal, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <Label Style="{StaticResource MyLabelStyle}" Text="Datum eerste les:"/>
+            <DatePicker x:Name="DatumEersteLes" Date="{Binding Vak.DatumEersteLes, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <Label Style="{StaticResource MyLabelStyle}" Text="Hoeveel denk je te scoren voor dit vak?"/>
+            <Label Text="{Binding Vak.VerwachteScore, StringFormat='{0}/20'}" x:Name="ScoreWaarde" Style="{StaticResource MyLabelStyle}" />
+            <Stepper x:Name="ScoreStep" Minimum="0" Maximum="20" Value="{Binding Vak.VerwachteScore, Mode=TwoWay}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <Button Text="Opslaan" x:Name="BtnOpslaan" Clicked="BtnOpslaan_Clicked"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Docenten:" Style="{StaticResource MyLabelStyle}" />
+        
+        <CollectionView ItemsSource="{Binding Vak.Docenten}" HorizontalOptions="Center">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Docent">
+                        <HorizontalStackLayout HorizontalOptions="Center">
+                            <Label Style="{StaticResource MyLabelStyle}" Text="{Binding Voornaam}" Margin="1"/>
+                            <Label Style="{StaticResource MyLabelStyle}" Text="{Binding Naam}" Margin="1"/>
+                        </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

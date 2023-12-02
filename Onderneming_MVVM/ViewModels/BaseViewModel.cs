@@ -9,6 +9,9 @@
         [ObservableProperty]
         string title;
 
+        [ObservableProperty]
+        public string achtergrondAfbeelding;
+
         public bool IsNotBusy => !IsBusy;
 
         [RelayCommand]

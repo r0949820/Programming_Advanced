@@ -7,11 +7,13 @@
              x:Class="Onderneming_MVVM.Views.MainPage"
              Title="{Binding Title}">
 
-    <Grid
+    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Wit}, Dark={StaticResource Blauw}}"
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
+        <Image Source="{Binding AchtergrondAfbeelding}" 
+               Aspect="AspectFit" Opacity="0.2"/>
 
         <CollectionView ItemsSource="{Binding Werknemers}" 
                         Grid.ColumnSpan="2">

@@ -10,6 +10,8 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home"
                           ContentTemplate="{DataTemplate view:MainPage}" />
+        <ShellContent Title="Instellingen"
+                      ContentTemplate="{DataTemplate view:InstellingPage}" />
         <ShellContent Title="Films"
                           ContentTemplate="{DataTemplate view:MoviePage}" />
         <ShellContent Title="Weer"

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VakkenOefening.Views.DetailsVak"
+             xmlns:viewmodel="clr-namespace:VakkenOefening.ViewModels"
+             xmlns:model="clr-namespace:VakkenOefening.Models"
+             x:DataType="viewmodel:VakViewModel"
+             Title="{Binding Vak.Naam}">
+
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Acties">
+            <MenuFlyoutItem x:Name="MfiOpslaan" Text="Opslaan" Command="{Binding GaTerugCommand}"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+
+                <Label VerticalOptions="Center">Naam:</Label>
+                <Entry 
+                    VerticalOptions="Center"
+                    Placeholder="Naam"
+                    Text="{Binding Vak.Naam}"/>
+
+            </HorizontalStackLayout>
+
+            <Image
+                HorizontalOptions="CenterAndExpand"
+                Source="{Binding Vak.Afbeelding}"/>
+
+            <Button
+                HorizontalOptions="CenterAndExpand"
+                Text="Upload/wijzig afbeelding"
+                Command="{Binding UploadAfbeeldingCommand}"/>
+
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Label VerticalOptions="Center">Vast lokaal:</Label>
+                <CheckBox
+                    VerticalOptions="Center"
+                    IsChecked="{Binding Vak.HeeftVastLokaal}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="CenterAndExpand">
+
+                <Label VerticalOptions="Center">Blok en lokaal:</Label>
+                <Entry
+                    VerticalOptions="Center"
+                    Placeholder="Blok"
+                    Text="{Binding Vak.VastLokaalBlok}"
+                    IsEnabled="{Binding Vak.HeeftVastLokaal}"
+                    MaxLength="1"/>
+                <Entry
+                    VerticalOptions="Center"
+                    Placeholder="Lokaal"
+                    Text="{Binding Vak.VastLokaalNummer}"
+                    IsEnabled="{Binding Vak.HeeftVastLokaal}"
+                    MaxLength="3"
+                    Keyboard="Numeric"/>
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="CenterAndExpand">
+
+                <Label VerticalOptions="Center" Padding="5">Verwachte score:</Label>
+                <Label 
+                    VerticalOptions="Center"
+                    Text="{Binding Vak.VerwachteScore, StringFormat='{0}/20'}" 
+                    x:Name="ScoreWaarde" />
+                <Stepper 
+                    VerticalOptions="Center"
+                    x:Name="ScoreStep" 
+                    Minimum="0" 
+                    Maximum="20" 
+                    Value="{Binding Vak.VerwachteScore, Mode=TwoWay}" />
+
+            </HorizontalStackLayout>
+
+            <Label 
+                HorizontalOptions="CenterAndExpand"
+                FontSize="Large"
+                Text="Docenten:" 
+                Margin="0,20,0,0"/>
+
+            <CollectionView 
+                ItemsSource="{Binding Vak.Docenten}"
+                HorizontalOptions="CenterAndExpand">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Docent">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding Voornaam}" Margin="1"/>
+                            <Label Text="{Binding Naam}" Margin="1"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

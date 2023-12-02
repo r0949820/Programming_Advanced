@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VakkenOefening.Views.OverzichtVakkenGrid"
+             xmlns:model="clr-namespace:VakkenOefening.Models"
+             xmlns:viewmodel="clr-namespace:VakkenOefening.ViewModels"
+             x:DataType="viewmodel:OverzichtVakkenViewModel"
+             Title="{Binding Title}">
+    
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Acties">
+            <MenuFlyoutItem x:Name="MfiToevoegen" Text="Toevoegen" Command="{Binding VoegVakToeCommand}"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    
+    <ScrollView>
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="5"
+			  RowDefinitions="*,*,*,*"
+			  RowSpacing="0"
+              BindableLayout.ItemsSource="{Binding Vakken}">
+
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer
+                    Direction="Right"
+                    CommandParameter="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OverzichtVakkenViewModel}}, Path=DeleteVakCommand}"/>
+            </Grid.GestureRecognizers>
+
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:Vak">
+                    <VerticalStackLayout
+                            Grid.Column="{Binding ColumnNumberGrid}"
+                            Grid.Row="{Binding RowNumberGrid}">
+
+                        <Label 
+                            Style="{StaticResource MyLabelStyle}" 
+                            Text="{Binding Naam}"/>
+
+                        <ImageButton 
+                            Source="{Binding Afbeelding}"
+                            AutomationId="{Binding Id}"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OverzichtVakkenViewModel}}, Path=OpenDetailsVakCommand}"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+    </ScrollView>
+</ContentPage>

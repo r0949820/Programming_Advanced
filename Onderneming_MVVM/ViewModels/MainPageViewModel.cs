@@ -16,6 +16,24 @@
             _repo = Repo;
             werknemer = new Werknemer();
             ToonWerknemers();
+
+            SetTheme();
+
+            MessagingCenter.Subscribe<InstellingViewModel>(this, "ThemeChanged", (sender) =>
+            {
+                SetTheme();
+            });
+        }
+
+        private void SetTheme()
+        {
+            var StartTheme = Preferences.Get("Theme", "");
+            string MainDir = FileSystem.AppDataDirectory;
+            var FileName = StartTheme == "Dark" ? Preferences.Get("ImageDark", "") : Preferences.Get("ImageLight", "");
+            Application.Current.UserAppTheme = StartTheme == "Dark" ? AppTheme.Dark : AppTheme.Light;
+
+            if (FileName != null)
+                AchtergrondAfbeelding = Path.Combine(MainDir, FileName);
         }
 
         [RelayCommand]

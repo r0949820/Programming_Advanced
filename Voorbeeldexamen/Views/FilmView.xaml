@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Voorbeeldexamen.ViewModels"
+             xmlns:model="clr-namespace:Voorbeeldexamen.Models"
+             x:DataType="viewmodel:FilmViewModel"
+             x:Class="Voorbeeldexamen.Views.FilmView"
+             Title="FilmView">
+
+    <Grid
+    RowDefinitions="Auto,*,Auto"
+    RowSpacing="0">
+
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding ZoekFilmsCommand}" IsEnabled="{Binding IsNotBusy}" Text="Toon films" Margin="10"/>
+
+        <CollectionView ItemsSource="{Binding MovieList}" Grid.Row="1">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="5"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Movie">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FilmViewModel}}, Path=GoToDetailsCommand}"/>
+                            <SwipeGestureRecognizer Direction="Down" CommandParameter="{Binding .}"
+                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FilmViewModel}}, Path=VerwijderFilmCommand}"/>
+                        </Frame.GestureRecognizers>
+
+                            <VerticalStackLayout Padding="10" HeightRequest="200">
+                                <Label Text="{Binding title}" FontSize="20" />
+                                <Label Text="{Binding director}" FontSize="16" />
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="2" x:Name="VoegFilmToe" Text="Voeg film toe" Command="{Binding GoToToevoegenCommand}" Margin="10"/>
+
+    </Grid>
+
+</ContentPage>

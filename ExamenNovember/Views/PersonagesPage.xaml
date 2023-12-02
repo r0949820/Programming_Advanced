@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ExamenNovember.Models"
+             xmlns:viewmodel="clr-namespace:ExamenNovember.ViewModels"
+             x:DataType="viewmodel:MovieViewModel"
+             x:Class="ExamenNovember.Views.PersonagesPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *, Auto" >
+            <Label Text="Characters:" VerticalOptions="Center" Grid.Row="0"/>
+            <CollectionView ItemsSource="{Binding MovieList}" SelectionMode="None" Grid.Row="1" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Movie">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="100" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MovieViewModel}}, Path=OpenPersonagesPageCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding characters}" HorizontalOptions="CenterAndExpand" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </Grid>
+    </ScrollView>
+</ContentPage>

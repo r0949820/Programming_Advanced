@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Voorbeeldexamen.ViewModels"
+             xmlns:model="clr-namespace:Voorbeeldexamen.Models"
+             x:DataType="viewmodel:FilmDetailsViewModel"
+             x:Class="Voorbeeldexamen.Views.FilmDetailView"
+             Title="FilmDetailView">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Label Text="{Binding Movie.title}"/>
+            <Label Text="{Binding Movie.director}" />
+
+            <CollectionView ItemsSource="{Binding PeopleList}" Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:People">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125">
+
+                                <VerticalStackLayout Padding="10" HeightRequest="200">
+                                    <Label Text="{Binding name}" FontSize="20" />
+                                    <Label Text="{Binding birth_year}" FontSize="16" />
+                                </VerticalStackLayout>
+
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+
+</ContentPage>
