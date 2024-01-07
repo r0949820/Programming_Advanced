@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OefeningLaatsteLes.Views.MainPage"
+             xmlns:models="clr-namespace:OefeningLaatsteLes.Models"
+             xmlns:viewmodels="clr-namespace:OefeningLaatsteLes.ViewModels"
+             x:DataType="viewmodels:SaleViewModel"
+             Title="MainPage">
+
+    <Grid RowDefinitions="*"
+        ColumnDefinitions="*, *, *">
+        <CollectionView Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="4"
+            SelectionMode="Single"
+            ItemsSource="{Binding Sales}"
+            EmptyView="No sales items to display">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Sale">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="{Binding Id}" FontSize="20"/>
+                        <Label Text="{Binding Store.Name}" FontSize="20"/>
+                        <Label Text="{Binding Amount}" FontSize="16"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Padding="10" Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="4">
+            <Label Text="{Binding Book.Id}" FontSize="20"/>
+            <Label Text="{Binding Book.Title}" FontSize="20"/>
+            <Label Text="{Binding Book.Publisher.Name}" FontSize="16"/>
+        </VerticalStackLayout>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Color="{StaticResource Primary}"
+            Grid.RowSpan="1"
+            Grid.ColumnSpan="1" />
+
+        <Grid RowSpacing="10"
+            ColumnSpacing="10"
+            RowDefinitions="auto,auto,auto,auto,auto"
+            ColumnDefinitions="*, auto"
+            Grid.Row="0"
+            Grid.Column="2">
+            <Button Text="Alle sales ophalen"
+                    Command="{Binding OphalenSalesCommand}"
+                Grid.Row="0"
+                Grid.Column="1"
+                IsEnabled="{Binding IsNotBusy}" />
+
+            <Entry Placeholder="Id"
+                   Text="{Binding Id}"
+                Grid.Row="1"
+                Grid.Column="0" />
+            <Button Text="Sales ophalen via het Id"
+                    Command="{Binding OphalenSalesViaIdCommand}"
+                Grid.Row="1"
+                Grid.Column="1"
+                IsEnabled="{Binding IsNotBusy}" />
+
+            <Button Text="Alle sales ophalen"
+                    Command="{Binding SalesOphalenWithStoreNameCommand}"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                IsEnabled="{Binding IsNotBusy}" />
+
+
+            <Entry Placeholder="Id"
+                   Text="{Binding BookId}"
+                Grid.Row="3"
+                Grid.Column="0" />
+            <Button Text="Sales ophalen via het Id"
+                    Command="{Binding OphalenBooksByBookIdCommand}"
+                Grid.Row="3"
+                Grid.Column="1"
+                IsEnabled="{Binding IsNotBusy}" />
+        </Grid>
+    </Grid>
+</ContentPage>
