@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Voorbereiding_ExamenJan.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Voorbereiding_ExamenJan.Views"
+    xmlns:local="clr-namespace:Voorbereiding_ExamenJan"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar >
+        <Tab Title="Home" >
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:MainPage}" Route="MainPage"  />
+        </Tab>
+        <Tab Title="Theme">
+            <ShellContent Title="Theme" ContentTemplate="{DataTemplate views:OptionsPage}" Route="OptionsPage"/>
+        </Tab>
+        
+    </TabBar>
+</Shell>

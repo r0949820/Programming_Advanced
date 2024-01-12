@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProefexamenJan.Views.MainPage"
+             xmlns:models="clr-namespace:ProefexamenJan.Models"
+             xmlns:viewmodels="clr-namespace:ProefexamenJan.ViewModels"
+             x:DataType="viewmodels:BookViewModel"
+             Title="MainPage">
+
+    <Grid RowDefinitions="*, Auto"
+          ColumnDefinitions="*, *">
+
+        <!-- Main CollectionView for Books -->
+        <CollectionView Grid.Row="0"
+                        Grid.Column="0"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Books}"
+                        EmptyView="No books to display"
+                        BackgroundColor="LightGray"
+                        Margin="10">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Book">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="Book ID" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="{Binding Id}" FontSize="20"/>
+                        <Label Text="Book Title" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="{Binding Title}" FontSize="20"/>
+                        <Label Text="Book Prijs" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="{Binding Price, StringFormat='€{0:F2}'}" FontSize="20"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- ActivityIndicator and Button Grid -->
+        <Grid Row="1"
+              Column="0">
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Color="{StaticResource Primary}" />
+
+            <!-- Button for OphalenBooksCommand -->
+            <Button Text="Alle boeken ophalen"
+                    Command="{Binding OphalenBooksCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    Margin="10"
+                    HeightRequest="50"
+                    WidthRequest="300"
+                    CornerRadius="5"/>
+        </Grid>
+
+        <!-- Secondary CollectionView for TitleAuthors -->
+        <CollectionView Grid.Row="0"
+                        Grid.Column="2"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding TitleAuthors}"
+                        EmptyView="No items to display"
+                        BackgroundColor="LightGray"
+                        Margin="10">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TitleAuthor">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="Book Title" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="{Binding Book.Title}" FontSize="20"/>
+                        <Label Text="Author Name" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="{Binding Author.FullName}" FontSize="20"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Button for OphalenBooksAndAuthorCommand -->
+        <Button Grid.Row="1"
+                Grid.Column="2"
+                Text="Alle Boeken met auteur ophalen"
+                Command="{Binding OphalenBooksAndAuthorCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                Margin="10"
+                HeightRequest="50"
+                WidthRequest="300"
+                CornerRadius="5"/>
+
+    </Grid>
+</ContentPage>
